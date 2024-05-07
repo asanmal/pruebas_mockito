@@ -8,17 +8,17 @@ import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
+import org.mockito.*;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 public class EmployeeManagerTest {
 
 	@Mock
 	private EmployeeRepository employeeRepository;
+
+
 
 	@Mock
 	private BankService bankService;
@@ -56,7 +56,13 @@ public class EmployeeManagerTest {
 	 */
 	@Test
 	public void testPayEmployeesReturnZeroWhenNoEmployeesArePresent() {
+		// Crear un stub when-thenReturn para employeeRepository.findAll
+		when(employeeRepository.findAll()).thenReturn(Collections.emptyList());
 
+
+		// Invocar employeeManager.payEmployees
+		employeeManager.payEmployees();
+		assertThat(employeeManager.payEmployees()).isEqualTo(0);
 	}
 
 	/**
@@ -68,9 +74,16 @@ public class EmployeeManagerTest {
 	 * Tambien comprueba con verify que se hace una llamada a bankService.pay
 	 * con los datos de pago del Employ del stub when-thenReturn inicialmente
 	 * creado.
-	 */
+	 **/
+
 	@Test
 	public void testPayEmployeesReturnOneWhenOneEmployeeIsPresentAndBankServicePayPaysThatEmployee() {
+			when(employeeRepository.findAll()).thenReturn(
+					Arrays.asList(new Employee("1", 1250.0d)));
+
+			assertThat(employeeManager.payEmployees()).isEqualTo(1);
+			verify(employeeRepository, times(1)).findAll();
+			verifyNoMoreInteractions(bankService);
 
 	}
 
