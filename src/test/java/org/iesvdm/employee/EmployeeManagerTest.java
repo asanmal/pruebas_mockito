@@ -12,6 +12,7 @@ import org.mockito.*;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class EmployeeManagerTest {
 
@@ -82,7 +83,7 @@ public class EmployeeManagerTest {
 					Arrays.asList(new Employee("1", 1250.0d)));
 
 			assertThat(employeeManager.payEmployees()).isEqualTo(1);
-			verify(employeeRepository, times(1)).findAll();
+			verify(bankService, times(1)).pay("1", 1250.0d);
 			verifyNoMoreInteractions(bankService);
 
 	}
@@ -101,8 +102,26 @@ public class EmployeeManagerTest {
 	 */
 	@Test
 	public void testPayEmployeesWhenSeveralEmployeeArePresent() {
+		Employee employee1 = new Employee("1", 1250.0d);
+		Employee employee2 = new Employee("2", 1050.0d);
+
+		List<Employee> list = Arrays.asList(employee1, employee2);
+
+		when(employeeRepository.findAll()).thenReturn(asList(employee1, employee2));
+
+		assertThat(employeeManager.payEmployees()).isEqualTo(2);
+
+		verify(bankService, times(1)).pay("1", 1250.0d);
+		verify(bankService, times(1)).pay("2", 1050.0d);
+		verifyNoMoreInteractions(bankService);
+
+		/*for (Employee employee : list) {
+			verify(bankService, times(1)).pay(employee.getId(), employee.getSalary());
+		}*/
+		/*verify(bankService, times(2)).pay(anyString(), anyDouble());*/
 
 	}
+
 
 	/**
 	 * Descripcion del test:
@@ -116,7 +135,20 @@ public class EmployeeManagerTest {
 	 */
 	@Test
 	public void testPayEmployeesInOrderWhenSeveralEmployeeArePresent() {
+		Employee employee1 = new Employee("1", 1250.0d);
+		Employee employee2 = new Employee("2", 1050.0d);
 
+		List<Employee> list = Arrays.asList(employee1, employee2);
+
+		when(employeeRepository.findAll()).thenReturn(asList(employee1, employee2));
+
+		assertThat(employeeManager.payEmployees()).isEqualTo(2);
+		InOrder inOrder = inOrder(bankService);
+
+
+		inOrder.verify(bankService).pay("1", 1250.0d);
+		inOrder.verify(bankService).pay("2", 1050.0d);
+		inOrder.verifyNoMoreInteractions();
 	}
 
 	/**
@@ -129,7 +161,21 @@ public class EmployeeManagerTest {
 	 */
 	@Test
 	public void testExampleOfInOrderWithTwoMocks() {
+		Employee employee1 = new Employee("1", 1250.0d);
+		Employee employee2 = new Employee("2", 1050.0d);
 
+		List<Employee> list = Arrays.asList(employee1, employee2);
+
+		when(employeeRepository.findAll()).thenReturn(asList(employee1, employee2));
+
+		assertThat(employeeManager.payEmployees()).isEqualTo(2);
+
+		InOrder inOrder = inOrder(employeeRepository, bankService);
+		inOrder.verify(employeeRepository).findAll();
+
+		inOrder.verify(bankService).pay("1", 1250.0d);
+		inOrder.verify(bankService).pay("2", 1050.0d);
+		inOrder.verifyNoMoreInteractions();
 	}
 
 
@@ -148,6 +194,21 @@ public class EmployeeManagerTest {
 	 */
 	@Test
 	public void testExampleOfArgumentCaptor() {
+		Employee employee1 = new Employee("1", 1250.0d);
+		Employee employee2 = new Employee("2", 1050.0d);
+		List<Employee> list = Arrays.asList(employee1, employee2);
+
+		when(employeeRepository.findAll()).thenReturn(asList(employee1, employee2));
+		assertThat(employeeManager.payEmployees()).isEqualTo(2);
+
+		ArgumentCaptor<String> idCaptor = ArgumentCaptor.forClass(String.class);
+		ArgumentCaptor<Double> amountCaptor = ArgumentCaptor.forClass(Double.class);
+		verify(bankService, times(2)).pay(idCaptor.capture(), amountCaptor.capture());
+
+		assertThat(idCaptor.getValue()).isEqualTo("2");
+		assertThat(amountCaptor.getValue()).isEqualTo(1050.0d);
+
+		verifyNoMoreInteractions(bankService);
 
 	}
 
