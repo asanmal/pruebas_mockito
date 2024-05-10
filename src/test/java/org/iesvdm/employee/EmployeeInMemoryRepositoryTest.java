@@ -20,7 +20,6 @@ import org.junit.jupiter.api.Test;
 public class EmployeeInMemoryRepositoryTest {
 
 	private EmployeeInMemoryRepository employeeRepository;
-
 	private List<Employee> employees;
 
 	@BeforeEach
@@ -45,7 +44,6 @@ public class EmployeeInMemoryRepositoryTest {
 
 		assertThat(employeeRepository.findAll()).containsExactly(employee1, employee2);
 
-
 	}
 
 	/**
@@ -59,7 +57,6 @@ public class EmployeeInMemoryRepositoryTest {
 		Employee employee1 = new Employee("1", 1000.0d);
 		employeeRepository.save(employee1);
 		assertThat(employeeRepository.findAll()).containsExactly(employee1);
-
 	}
 
 	/**
@@ -85,7 +82,6 @@ public class EmployeeInMemoryRepositoryTest {
 		employeeRepository.save(employee2);
 
 		assertThat(employees.get(0).getSalary()).isEqualTo(1500.0d);
-
 
 	}
 }

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="AnalysisUIOptions">
     <option name="ANALYZE_INJECTED_CODE" value="false" />
-    <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
@@ -10,6 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5c399beb-7381-4adb-ab43-564baa14b56b" name="Changes" comment="Actualizaciones a la teoría de mockito alvaro">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/iesvdm/employee/EmployeeInMemoryRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/iesvdm/employee/EmployeeInMemoryRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/iesvdm/employee/EmployeeManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/iesvdm/employee/EmployeeManagerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +42,9 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$MAVEN_REPOSITORY$/org/mockito/mockito-core/5.11.0/mockito-core-5.11.0-sources.jar!/org/mockito/ArgumentMatchers.java" root0="SKIP_INSPECTION" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -50,38 +54,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.EmployeeInMemoryRepositoryTest.testEmployeeRepositoryFindAll.executor": "Run",
-    "JUnit.EmployeeInMemoryRepositoryTest.testEmployeeRepositorySaveExistingEmployee.executor": "Run",
-    "JUnit.EmployeeInMemoryRepositoryTest.testEmployeeRepositorySaveNewEmployee.executor": "Run",
-    "JUnit.EmployeeManagerTest.testExampleOfArgumentCaptor.executor": "Run",
-    "JUnit.EmployeeManagerTest.testExampleOfInOrderWithTwoMocks.executor": "Run",
-    "JUnit.EmployeeManagerTest.testPayEmployeesInOrderWhenSeveralEmployeeArePresent.executor": "Run",
-    "JUnit.EmployeeManagerTest.testPayEmployeesReturnOneWhenOneEmployeeIsPresentAndBankServicePayPaysThatEmployee.executor": "Run",
-    "JUnit.EmployeeManagerTest.testPayEmployeesReturnZeroWhenNoEmployeesArePresent.executor": "Run",
-    "JUnit.EmployeeManagerTest.testPayEmployeesWhenSeveralEmployeeArePresent.executor": "Run",
-    "JUnit.MockVsSpyTest.whenThenReturn_doReturnWhen_spy_sideEffect.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/usuario/IdeaProjects/proyecto_mockito/src",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.EmployeeInMemoryRepositoryTest.testEmployeeRepositoryFindAll.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EmployeeInMemoryRepositoryTest.testEmployeeRepositorySaveExistingEmployee.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EmployeeInMemoryRepositoryTest.testEmployeeRepositorySaveNewEmployee.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EmployeeManagerTest.testExampleOfArgumentCaptor.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EmployeeManagerTest.testExampleOfInOrderWithTwoMocks.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EmployeeManagerTest.testPayEmployeesInOrderWhenSeveralEmployeeArePresent.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EmployeeManagerTest.testPayEmployeesReturnOneWhenOneEmployeeIsPresentAndBankServicePayPaysThatEmployee.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EmployeeManagerTest.testPayEmployeesReturnZeroWhenNoEmployeesArePresent.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EmployeeManagerTest.testPayEmployeesWhenSeveralEmployeeArePresent.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MockVsSpyTest.whenThenReturn_doReturnWhen_spy_sideEffect.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/usuario/IdeaProjects/proyecto_mockito/src&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\usuario\IdeaProjects\proyecto_mockito\src" />
@@ -206,6 +210,8 @@
       <workItem from="1715070122036" duration="3740000" />
       <workItem from="1715156656223" duration="3874000" />
       <workItem from="1715164985347" duration="43000" />
+      <workItem from="1715165043192" duration="364000" />
+      <workItem from="1715328055506" duration="579000" />
     </task>
     <task id="LOCAL-00001" summary="inicial">
       <option name="closed" value="true" />
@@ -255,7 +261,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715162157844</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Actualizaciones a la teoría de mockito alvaro">
+      <option name="closed" value="true" />
+      <created>1715165186933</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1715165186933</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

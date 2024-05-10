@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.*;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -18,7 +17,6 @@ public class EmployeeManagerTest {
 
 	@Mock
 	private EmployeeRepository employeeRepository;
-
 
 
 	@Mock
@@ -60,7 +58,6 @@ public class EmployeeManagerTest {
 		// Crear un stub when-thenReturn para employeeRepository.findAll
 		when(employeeRepository.findAll()).thenReturn(Collections.emptyList());
 
-
 		// Invocar employeeManager.payEmployees
 		employeeManager.payEmployees();
 		assertThat(employeeManager.payEmployees()).isEqualTo(0);
@@ -85,7 +82,6 @@ public class EmployeeManagerTest {
 			assertThat(employeeManager.payEmployees()).isEqualTo(1);
 			verify(bankService, times(1)).pay("1", 1250.0d);
 			verifyNoMoreInteractions(bankService);
-
 	}
 
 
@@ -119,7 +115,6 @@ public class EmployeeManagerTest {
 			verify(bankService, times(1)).pay(employee.getId(), employee.getSalary());
 		}*/
 		/*verify(bankService, times(2)).pay(anyString(), anyDouble());*/
-
 	}
 
 
@@ -144,7 +139,6 @@ public class EmployeeManagerTest {
 
 		assertThat(employeeManager.payEmployees()).isEqualTo(2);
 		InOrder inOrder = inOrder(bankService);
-
 
 		inOrder.verify(bankService).pay("1", 1250.0d);
 		inOrder.verify(bankService).pay("2", 1050.0d);
@@ -176,6 +170,7 @@ public class EmployeeManagerTest {
 		inOrder.verify(bankService).pay("1", 1250.0d);
 		inOrder.verify(bankService).pay("2", 1050.0d);
 		inOrder.verifyNoMoreInteractions();
+
 	}
 
 
@@ -209,7 +204,6 @@ public class EmployeeManagerTest {
 		assertThat(amountCaptor.getValue()).isEqualTo(1050.0d);
 
 		verifyNoMoreInteractions(bankService);
-
 	}
 
 	/**
@@ -223,6 +217,7 @@ public class EmployeeManagerTest {
 	 */
 	@Test
 	public void testEmployeeSetPaidIsCalledAfterPaying() {
+
 
 	}
 
