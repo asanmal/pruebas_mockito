@@ -196,13 +196,24 @@ public class EmployeeManagerTest {
 		when(employeeRepository.findAll()).thenReturn(asList(employee1, employee2));
 		assertThat(employeeManager.payEmployees()).isEqualTo(2);
 
-		ArgumentCaptor<String> idCaptor = ArgumentCaptor.forClass(String.class);
-		ArgumentCaptor<Double> amountCaptor = ArgumentCaptor.forClass(Double.class);
+		// creamos los captor
+		idCaptor = ArgumentCaptor.forClass(String.class);
+		amountCaptor = ArgumentCaptor.forClass(Double.class);
 		verify(bankService, times(2)).pay(idCaptor.capture(), amountCaptor.capture());
 
-		assertThat(idCaptor.getValue()).isEqualTo("2");
-		assertThat(amountCaptor.getValue()).isEqualTo(1050.0d);
+		// cogemos todos los valores o bien con list o bien con var si ya estan definidos
+		List<String> listIdCaptor = idCaptor.getAllValues();
+		var listAmountCaptor = amountCaptor.getAllValues();
 
+		// ponemos uno a uno los empleados usando los idCaptor y AmountCaptor
+		assertThat(listIdCaptor.get(0)).isEqualTo("1");
+		assertThat(listAmountCaptor.get(0)).isEqualTo(1250.0d);
+
+		//pasamos el segundo empleado
+		assertThat(listIdCaptor.get(1)).isEqualTo("2");
+		assertThat(listAmountCaptor.get(1)).isEqualTo(1050.0d);
+
+		// no mas iteraciones al bankservice
 		verifyNoMoreInteractions(bankService);
 	}
 
@@ -217,8 +228,16 @@ public class EmployeeManagerTest {
 	 */
 	@Test
 	public void testEmployeeSetPaidIsCalledAfterPaying() {
+		when(toBePaid.getId()).thenReturn("2");
+		when(toBePaid.getSalary()).thenReturn(2000.d);
+		when(employeeRepository.findAll()).thenReturn(asList(toBePaid));
 
+		employeeManager.payEmployees();
+		assertThat(employeeManager.payEmployees()).isEqualTo(1);
 
+		InOrder inOrder = inOrder(bankService, toBePaid);
+		inOrder.verify(bankService).pay("2", 2000.0d);
+		inOrder.verify(toBePaid).setPaid(true);
 	}
 
 
@@ -236,6 +255,17 @@ public class EmployeeManagerTest {
 	 */
 	@Test
 	public void testPayEmployeesWhenBankServiceThrowsException() {
+		when(notToBePaid.getId()).thenReturn("1");
+		when(notToBePaid.getSalary()).thenReturn(1000.d);
+		when(employeeRepository.findAll()).thenReturn(asList(notToBePaid));
+
+		doThrow(RuntimeException.class).when(bankService).pay(anyString(), anyDouble());
+
+		employeeManager.payEmployees();
+		assertThat(employeeManager.payEmployees()).isEqualTo(0);
+
+
+		verify(notToBePaid).setPaid(false);
 
 	}
 
@@ -254,6 +284,25 @@ public class EmployeeManagerTest {
 	 */
 	@Test
 	public void testOtherEmployeesArePaidWhenBankServiceThrowsException() {
+
+		//configuracion del stub para employeeRepository.findAll())
+		when(employeeRepository.findAll()).thenReturn(Arrays.asList(notToBePaid, toBePaid));
+
+		//Lanza excepcion la primera y la segunda nada
+		doThrow(RuntimeException.class).doNothing().when(bankService).pay(anyString(), anyDouble());
+
+		// invoco los pagos
+		employeeManager.payEmployees();
+
+		// compruebo que solo se le paga a uno
+		assertThat(employeeManager.payEmployees()).isEqualTo(1);
+
+		// verifico que al que se le paga es al toBePaid y con el notToBePaid lanza la excepcion
+		verify(notToBePaid).setPaid(false);
+		verify(toBePaid).setPaid(true);
+		verifyNoMoreInteractions(bankService);
+
+
 	}
 
 
@@ -273,6 +322,18 @@ public class EmployeeManagerTest {
 	 */
 	@Test
 	public void testArgumentMatcherExample() {
+		//Creo un stub when-thenReturn para employeeRepository.findAll que devuelve una coleccion de 2 Employee
+		when(employeeRepository.findAll()).thenReturn(asList(notToBePaid, toBePaid));
+		doThrow(RuntimeException.class).when(bankService).pay(argThat(s -> s.equals("1")), anyDouble());
+		doNothing().when(bankService).pay(argThat(s -> s.equals("2")), anyDouble());
+
+		//invoco al employeeManager.payEmployees y compruebo que solo se le paga a uno
+		employeeManager.payEmployees();
+		assertThat(employeeManager.payEmployees()).isEqualTo(1);
+
+		// verifico que solo se le paga al toBePaid y si no que lance una excepcion
+		verify(notToBePaid).setPaid(false);
+		verify(toBePaid).setPaid(true);
 
 	}
 
